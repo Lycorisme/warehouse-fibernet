@@ -60,8 +60,8 @@ use App\Models\Admin\SubmenuModel; ?>
                                 <i class="fe fe-shield me-2"></i>Aktifkan Semua
                             </button>
                         </div>
+                        @endif
                     </div>
-                </div>
                 </div>
 
                 @if($detailrole != '')
