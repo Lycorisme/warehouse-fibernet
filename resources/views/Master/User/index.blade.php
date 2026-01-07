@@ -15,31 +15,33 @@
     <!-- PAGE-HEADER END -->
 
     <!-- ROW -->
-    <div class="row row-sm">
+    <div class="row mt-4">
         <div class="col-lg-12">
-            <div class="card">
-                <div class="card-header justify-content-between">
-                    <h3 class="card-title">List User</h3>
+            <div class="card border-0 shadow-sm">
+                <div class="card-header border-bottom-0 pb-0 d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center">
                     <div>
-                        <a class="modal-effect btn btn-primary-light" data-bs-effect="effect-super-scaled"
-                            data-bs-toggle="modal" href="#modaldemo8">Tambah Data <i class="fe fe-plus"></i></a>
-                        <button class="btn btn-primary-light" onclick="printWindow()"><i class="fe fe-printer"></i>Print</button>
+                        <h3 class="card-title fw-bold fs-18">Manajemen Pengguna</h3>
+                        <p class="text-muted fs-12 mb-0">Kelola akun pengguna, hak akses, dan profil dalam sistem.</p>
                     </div>
-
-
+                    <div class="d-flex gap-2">
+                        <a class="modal-effect btn btn-primary box-primary-shadow px-4 py-2" data-bs-effect="effect-super-scaled"
+                            data-bs-toggle="modal" href="#modaldemo8">
+                            <i class="fe fe-plus-circle me-2"></i> Tambah User</a>
+                        <button class="btn btn-outline-danger px-4" onclick="printWindow()"><i class="fe fe-printer me-2"></i>Print PDF</button>
+                    </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body pt-4">
                     <div class="table-responsive">
                         <table id="table-1" width="100%"
-                            class="table table-bordered text-nowrap border-bottom dataTable no-footer dtr-inline collapsed">
-                            <thead>
-                                <th class="border-bottom-0" width="1%">No</th>
-                                <th class="border-bottom-0">Foto</th>
-                                <th class="border-bottom-0">Nama Lengkap</th>
-                                <th class="border-bottom-0">Username</th>
-                                <th class="border-bottom-0">Email</th>
-                                <th class="border-bottom-0">Role</th>
-                                <th class="border-bottom-0" width="1%">Action</th>
+                            class="table table-hover border-bottom dataTable no-footer">
+                            <thead class="bg-light-50">
+                                <th class="border-bottom-0 text-muted fw-bold" width="1%">NO</th>
+                                <th class="border-bottom-0 text-muted fw-bold">FOTO</th>
+                                <th class="border-bottom-0 text-muted fw-bold">NAMA LENGKAP</th>
+                                <th class="border-bottom-0 text-muted fw-bold">USERNAME</th>
+                                <th class="border-bottom-0 text-muted fw-bold">EMAIL</th>
+                                <th class="border-bottom-0 text-muted fw-bold">ROLE</th>
+                                <th class="border-bottom-0 text-muted fw-bold text-end" width="1%">ACTION</th>
                             </thead>
                             <tbody></tbody>
                         </table>
