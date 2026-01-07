@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin\AksesModel;
 use App\Models\Admin\JenisBarangModel;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -27,18 +26,21 @@ class JenisBarangController extends Controller
                 ->addIndexColumn()
                 ->addColumn('ket', function ($row) {
                     $ket = $row->jenisbarang_ket == '' ? '-' : $row->jenisbarang_ket;
-
                     return $ket;
                 })
                 ->addColumn('action', function ($row) {
                     $array = array(
                         "jenisbarang_id" => $row->jenisbarang_id,
                         "jenisbarang_nama" => trim(preg_replace('/[^A-Za-z0-9-]+/', '_', $row->jenisbarang_nama)),
+                        // REVISI: Menggunakan nama field yang Anda buat
+                        "jenis_initial" => $row->jenis_initial,
                         "jenisbarang_ket" => trim(preg_replace('/[^A-Za-z0-9-]+/', '_', $row->jenisbarang_ket)),
                     );
+
                     $button = '';
                     $hakEdit = AksesModel::leftJoin('tbl_submenu', 'tbl_submenu.submenu_id', '=', 'tbl_akses.submenu_id')->where(array('tbl_akses.role_id' => Session::get('user')->role_id, 'tbl_submenu.submenu_judul' => 'Jenis', 'tbl_akses.akses_type' => 'update'))->count();
                     $hakDelete = AksesModel::leftJoin('tbl_submenu', 'tbl_submenu.submenu_id', '=', 'tbl_akses.submenu_id')->where(array('tbl_akses.role_id' => Session::get('user')->role_id, 'tbl_submenu.submenu_judul' => 'Jenis', 'tbl_akses.akses_type' => 'delete'))->count();
+
                     if ($hakEdit > 0 && $hakDelete > 0) {
                         $button .= '
                         <div class="g-2">
@@ -71,11 +73,12 @@ class JenisBarangController extends Controller
     {
         $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $request->jenisbarang)));
 
-        //create
+        // REVISI: Simpan ke kolom jenis_initial
         JenisBarangModel::create([
             'jenisbarang_nama' => $request->jenisbarang,
-            'jenisbarang_slug'   => $slug,
-            'jenisbarang_ket' => $request->ket
+            'jenis_initial'    => $request->kode, // Input dari form name="kode"
+            'jenisbarang_slug' => $slug,
+            'jenisbarang_ket'  => $request->ket
         ]);
 
         return response()->json(['success' => 'Berhasil']);
@@ -85,11 +88,12 @@ class JenisBarangController extends Controller
     {
         $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $request->jenisbarang)));
 
-        //update
+        // REVISI: Update ke kolom jenis_initial
         $jenisbarang->update([
             'jenisbarang_nama' => $request->jenisbarang,
-            'jenisbarang_slug'   => $slug,
-            'jenisbarang_ket' => $request->ket
+            'jenis_initial'    => $request->kode,
+            'jenisbarang_slug' => $slug,
+            'jenisbarang_ket'  => $request->ket
         ]);
 
         return response()->json(['success' => 'Berhasil']);
@@ -97,11 +101,8 @@ class JenisBarangController extends Controller
 
     public function proses_hapus(Request $request, JenisBarangModel $jenisbarang)
     {
-        
-        //delete
         $jenisbarang->delete();
 
         return response()->json(['success' => 'Berhasil']);
     }
-
 }

@@ -3,11 +3,11 @@
 @section('content')
     <!-- PAGE-HEADER -->
     <div class="page-header">
-        <h1 class="page-title">Customer</h1>
+        <h1 class="page-title">Supplier</h1>
         <div>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item text-gray">Admin</li>
-                <li class="breadcrumb-item active" aria-current="page">Customer</li>
+                <li class="breadcrumb-item active" aria-current="page">Supplier</li>
             </ol>
         </div>
     </div>
@@ -19,7 +19,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header justify-content-between">
-                    <h3 class="card-title">Data Customer</h3>
+                    <h3 class="card-title">Data Supplier</h3>
                     <div>
                         {{-- Tombol Print (Ditambahkan) --}}
                         <button class="btn btn-primary-light" onclick="printWindow()"><i class="fe fe-printer"></i>

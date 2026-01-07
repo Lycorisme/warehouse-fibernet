@@ -33,6 +33,8 @@ class SatuanController extends Controller
                     $array = array(
                         "satuan_id" => $row->satuan_id,
                         "satuan_nama" => trim(preg_replace('/[^A-Za-z0-9-]+/', '_', $row->satuan_nama)),
+                        // REVISI: Menambahkan satuan_initial agar muncul saat edit
+                        "satuan_initial" => $row->satuan_initial,
                         "satuan_keterangan" => trim(preg_replace('/[^A-Za-z0-9-]+/', '_', $row->satuan_keterangan))
                     );
                     $button = '';
@@ -73,8 +75,10 @@ class SatuanController extends Controller
         //insert data
         SatuanModel::create([
             'satuan_nama' => $request->satuan,
+            // REVISI: Simpan input kode ke kolom satuan_initial
+            'satuan_initial' => $request->kode,
             'satuan_slug' => $slug,
-            'satuan_keterangan'   => $request->ket,
+            'satuan_keterangan' => $request->ket,
         ]);
 
         return response()->json(['success' => 'Berhasil']);
@@ -87,8 +91,10 @@ class SatuanController extends Controller
         //update data
         $satuan->update([
             'satuan_nama' => $request->satuan,
+            // REVISI: Update kolom satuan_initial
+            'satuan_initial' => $request->kode,
             'satuan_slug' => $slug,
-            'satuan_keterangan'  => $request->ket,
+            'satuan_keterangan' => $request->ket,
         ]);
 
         return response()->json(['success' => 'Berhasil']);

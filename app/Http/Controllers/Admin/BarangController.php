@@ -1,7 +1,9 @@
 <?php
 
+
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\AksesModel;
 use App\Models\Admin\BarangkeluarModel;
@@ -87,14 +89,14 @@ class BarangController extends Controller
                     }
 
                     $totalstok = $row->barang_stok + ($jmlmasuk - $jmlkeluar);
-                    if($totalstok == 0){
-                        $result = '<span class="">'.$totalstok.'</span>';
-                    }else if($totalstok > 0){
-                        $result = '<span class="text-success">'.$totalstok.'</span>';
-                    }else{
-                        $result = '<span class="text-danger">'.$totalstok.'</span>';
+                    if ($totalstok == 0) {
+                        $result = '<span class="">' . $totalstok . '</span>';
+                    } else if ($totalstok > 0) {
+                        $result = '<span class="text-success">' . $totalstok . '</span>';
+                    } else {
+                        $result = '<span class="text-danger">' . $totalstok . '</span>';
                     }
-                    
+
 
                     return $result;
                 })
@@ -193,14 +195,14 @@ class BarangController extends Controller
                     }
 
                     $totalstok = $row->barang_stok + ($jmlmasuk - $jmlkeluar);
-                    if($totalstok == 0){
-                        $result = '<span class="">'.$totalstok.'</span>';
-                    }else if($totalstok > 0){
-                        $result = '<span class="text-success">'.$totalstok.'</span>';
-                    }else{
-                        $result = '<span class="text-danger">'.$totalstok.'</span>';
+                    if ($totalstok == 0) {
+                        $result = '<span class="">' . $totalstok . '</span>';
+                    } else if ($totalstok > 0) {
+                        $result = '<span class="text-success">' . $totalstok . '</span>';
+                    } else {
+                        $result = '<span class="text-danger">' . $totalstok . '</span>';
                     }
-                    
+
 
                     return $result;
                 })
@@ -236,7 +238,7 @@ class BarangController extends Controller
     {
         $img = "";
         $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $request->nama)));
-        
+
         // --- TAMBAHAN LOGIKA HARGA ---
         // Jika harga kosong, set jadi 0. 
         // Jika ada isinya, hapus titik (.) jika formatnya ribuan (cth: 10.000 jadi 10000)
@@ -328,5 +330,76 @@ class BarangController extends Controller
         $barang->delete();
 
         return response()->json(['success' => 'Berhasil']);
+    }
+
+    // --- TAMBAHAN: GENERATOR KODE OTOMATIS ---
+    public function getKode(Request $request)
+    {
+        // 1. Validasi Input
+        if (!$request->jenis_id || !$request->merk_id || !$request->satuan_id) {
+            return response()->json(['status' => 'error', 'msg' => 'Data belum lengkap!']);
+        }
+
+        // 2. Ambil Kode Initial dari Tabel Master
+        $jenis  = JenisBarangModel::find($request->jenis_id);
+        $merk   = MerkModel::find($request->merk_id);
+        $satuan = SatuanModel::find($request->satuan_id);
+
+        if (!$jenis || !$merk || !$satuan) {
+            return response()->json(['status' => 'error', 'msg' => 'Data master tidak ditemukan!']);
+        }
+
+        $kodeJenis  = $jenis->jenis_initial;
+        $kodeMerk   = $merk->merk_initial;
+        $kodeSatuan = $satuan->satuan_initial;
+
+        // 3. Cari Barang Terakhir dengan Kombinasi SAMA
+        $lastBarang = BarangModel::where('jenisbarang_id', $request->jenis_id)
+            ->where('merk_id', $request->merk_id)
+            ->where('satuan_id', $request->satuan_id)
+            ->orderBy('barang_id', 'DESC')
+            ->first();
+
+        // 4. Generate Nomor Urut
+        $noUrut = 1;
+        if ($lastBarang) {
+            // Pecah kode terakhir
+            $parts = explode('-', $lastBarang->barang_kode);
+            $lastNumber = end($parts); // Ambil angka paling belakang
+
+            if (is_numeric($lastNumber)) {
+                $noUrut = intval($lastNumber) + 1;
+            }
+        }
+
+        // Format 4 digit (0001, 0002, dst)
+        $strUrut = str_pad($noUrut, 4, '0', STR_PAD_LEFT);
+
+        // 5. Gabungkan Kode (UPDATE DISINI)
+        // Format Lama: JENIS - MERK - SATUAN - URUTAN
+        // Format Baru: JENIS - SATUAN - MERK - URUTAN
+        $kodeJadi = $kodeJenis . '-' . $kodeSatuan . '-' . $kodeMerk . '-' . $strUrut;
+
+        return response()->json(['status' => 'success', 'kode' => $kodeJadi]);
+    }
+
+    // --- TAMBAHAN: FUNGSI CETAK BARCODE SATUAN ---
+    public function cetakBarcode($id)
+    {
+        // Menggunakan join yang sama dengan fungsi show agar data Merk, Satuan, dll terbaca di label
+        $data = BarangModel::leftJoin('tbl_jenisbarang', 'tbl_jenisbarang.jenisbarang_id', '=', 'tbl_barang.jenisbarang_id')
+            ->leftJoin('tbl_satuan', 'tbl_satuan.satuan_id', '=', 'tbl_barang.satuan_id')
+            ->leftJoin('tbl_merk', 'tbl_merk.merk_id', '=', 'tbl_barang.merk_id')
+            ->where('tbl_barang.barang_id', $id)
+            ->first();
+
+        if (!$data) {
+            return redirect()->back()->with('error', 'Data barang tidak ditemukan.');
+        }
+
+        $data["title"] = "Cetak Barcode - " . $data->barang_nama;
+
+        // Mengirim variable $data ke view cetak_barcode
+        return view('Admin.Barang.cetak_barcode', compact('data'));
     }
 }

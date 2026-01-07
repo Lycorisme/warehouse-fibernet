@@ -1,4 +1,3 @@
-<!-- MODAL TAMBAH -->
 <div class="modal fade" data-bs-backdrop="static" id="modaldemo8">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content modal-content-demo">
@@ -7,6 +6,12 @@
                     data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
+                <div class="form-group">
+                    <label for="kode" class="form-label">Kode Initial (Angka) <span class="text-danger">*</span></label>
+                    <input type="text" name="kode" class="form-control" placeholder="Cth: 01" maxlength="2" onkeypress="return isNumber(event)">
+                    <small class="text-muted">Maksimal 2 angka.</small>
+                </div>
+
                 <div class="form-group">
                     <label for="satuan" class="form-label">Nama Satuan <span class="text-danger">*</span></label>
                     <input type="text" name="satuan" class="form-control" placeholder="">
@@ -30,15 +35,29 @@
     </div>
 </div>
 
-
 @section('formTambahJS')
     <script>
+        function isNumber(evt) {
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                return false;
+            }
+            return true;
+        }
+
         function checkForm() {
+            const kode = $("input[name='kode']").val();
             const satuan = $("input[name='satuan']").val();
             setLoading(true);
             resetValid();
 
-            if (satuan == "") {
+            if (kode == "") {
+                validasi('Kode Initial wajib di isi!', 'warning');
+                $("input[name='kode']").addClass('is-invalid');
+                setLoading(false);
+                return false;
+            } else if (satuan == "") {
                 validasi('Nama Satuan wajib di isi!', 'warning');
                 $("input[name='satuan']").addClass('is-invalid');
                 setLoading(false);
@@ -46,10 +65,10 @@
             } else {
                 submitForm();
             }
-
         }
 
         function submitForm() {
+            const kode = $("input[name='kode']").val();
             const satuan = $("input[name='satuan']").val();
             const ket = $("textarea[name='ket']").val();
 
@@ -58,6 +77,7 @@
                 url: "{{ route('satuan.store') }}",
                 enctype: 'multipart/form-data',
                 data: {
+                    kode: kode, // Kirim kode
                     satuan: satuan,
                     ket: ket
                 },
@@ -69,17 +89,18 @@
                     });
                     table.ajax.reload(null, false);
                     reset();
-
                 }
             });
         }
 
         function resetValid() {
+            $("input[name='kode']").removeClass('is-invalid');
             $("input[name='satuan']").removeClass('is-invalid');
         };
 
         function reset() {
             resetValid();
+            $("input[name='kode']").val('');
             $("input[name='satuan']").val('');
             $("textarea[name='ket']").val('');
             setLoading(false);

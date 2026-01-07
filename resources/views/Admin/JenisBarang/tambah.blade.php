@@ -1,4 +1,3 @@
-<!-- MODAL TAMBAH -->
 <div class="modal fade" data-bs-backdrop="static" id="modaldemo8">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content modal-content-demo">
@@ -7,8 +6,14 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
+                    <label for="kode" class="form-label">Kode Initial (Angka) <span class="text-danger">*</span></label>
+                    <input type="text" name="kode" class="form-control" placeholder="Cth: 01" maxlength="2" onkeypress="return isNumber(event)">
+                    <small class="text-muted">Maksimal 2 angka.</small>
+                </div>
+
+                <div class="form-group">
                     <label for="jenisbarang" class="form-label">Jenis Barang <span class="text-danger">*</span></label>
-                    <input type="text" name="jenisbarang" class="form-control" placeholder="">
+                    <input type="text" name="jenisbarang" class="form-control" placeholder="Cth: Elektronik">
                 </div>
                 <div class="form-group">
                     <label for="ket" class="form-label">Keterangan</label>
@@ -29,12 +34,28 @@
 
 @section('formTambahJS')
 <script>
+    // Fungsi agar input hanya angka
+    function isNumber(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        return true;
+    }
+
     function checkForm() {
+        const kode = $("input[name='kode']").val();
         const jenis = $("input[name='jenisbarang']").val();
         setLoading(true);
         resetValid();
 
-        if (jenis == "") {
+        if (kode == "") {
+            validasi('Kode Initial wajib di isi!', 'warning');
+            $("input[name='kode']").addClass('is-invalid');
+            setLoading(false);
+            return false;
+        } else if (jenis == "") {
             validasi('Jenis Barang wajib di isi!', 'warning');
             $("input[name='jenisbarang']").addClass('is-invalid');
             setLoading(false);
@@ -45,6 +66,7 @@
     }
 
     function submitForm() {
+        const kode = $("input[name='kode']").val();
         const jenis = $("input[name='jenisbarang']").val();
         const ket = $("textarea[name='ket']").val();
 
@@ -53,6 +75,7 @@
             url: "{{route('jenisbarang.store')}}",
             enctype: 'multipart/form-data',
             data: {
+                kode: kode, // Kirim kode ke controller
                 jenisbarang: jenis,
                 ket: ket
             },
@@ -64,18 +87,19 @@
                 });
                 table.ajax.reload(null, false);
                 reset();
-                
             }
         });
     }
 
     function resetValid() {
+        $("input[name='kode']").removeClass('is-invalid');
         $("input[name='jenisbarang']").removeClass('is-invalid');
         $("textarea[name='ket']").removeClass('is-invalid');
     };
 
     function reset() {
         resetValid();
+        $("input[name='kode']").val('');
         $("input[name='jenisbarang']").val('');
         $("textarea[name='ket']").val('');
         setLoading(false);

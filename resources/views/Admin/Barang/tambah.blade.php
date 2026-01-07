@@ -117,6 +117,53 @@
                 }
             });
 
+            // ============================================================
+            // 4. (BARU) GENERATOR KODE OTOMATIS
+            // ============================================================
+            $('select[name="jenisbarang"], select[name="merk"], select[name="satuan"]').on('change', function() {
+                // Ambil value dari 3 dropdown
+                var jenisId = $('select[name="jenisbarang"]').val();
+                var merkId = $('select[name="merk"]').val();
+                var satuanId = $('select[name="satuan"]').val();
+
+                // Cek apakah ketiganya sudah dipilih semua?
+                if (jenisId && merkId && satuanId) {
+
+                    // Tampilkan status loading di input kode
+                    $("input[name='kode']").val('Loading...');
+
+                    // Panggil AJAX ke Controller
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{ route('barang.getkode') }}", // Pastikan route ini sudah ada di web.php
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            jenis_id: jenisId,
+                            merk_id: merkId,
+                            satuan_id: satuanId
+                        },
+                        success: function(response) {
+                            if (response.status == 'success') {
+                                // BERHASIL: Isi input kode dengan hasil
+                                $("input[name='kode']").val(response.kode);
+                            } else {
+                                // GAGAL: Kosongkan field
+                                $("input[name='kode']").val('');
+                                console.log(response.msg);
+                            }
+                        },
+                        error: function(xhr) {
+                            $("input[name='kode']").val('');
+                            console.log('Error:', xhr);
+                        }
+                    });
+                } else {
+                    // Jika belum lengkap, kosongkan kode
+                    $("input[name='kode']").val('');
+                }
+            });
+            // ============================================================
+
         });
 
         function checkForm() {

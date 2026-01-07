@@ -1,7 +1,6 @@
 @extends('Master.Layouts.app', ['title' => $title])
 
 @section('content')
-    <!-- PAGE-HEADER -->
     <div class="page-header">
         <h1 class="page-title">Jenis Barang</h1>
         <div>
@@ -11,9 +10,6 @@
             </ol>
         </div>
     </div>
-    <!-- PAGE-HEADER END -->
-
-    <!-- ROW -->
     <div class="row row-sm">
         <div class="col-lg-12">
             <div class="card">
@@ -33,7 +29,7 @@
                             class="table table-bordered text-nowrap border-bottom dataTable no-footer dtr-inline collapsed">
                             <thead>
                                 <th class="border-bottom-0" width="1%">No</th>
-                                <th class="border-bottom-0">Jenis Barang</th>
+                                <th class="border-bottom-0" width="10%">Kode</th> <th class="border-bottom-0">Jenis Barang</th>
                                 <th class="border-bottom-0">Keterangan</th>
                                 <th class="border-bottom-0" width="1%">Action</th>
                             </thead>
@@ -44,8 +40,6 @@
             </div>
         </div>
     </div>
-    <!-- END ROW -->
-
     @include('Admin.JenisBarang.tambah')
     @include('Admin.JenisBarang.edit')
     @include('Admin.JenisBarang.hapus')
@@ -53,6 +47,9 @@
     <script>
         function update(data) {
             $("input[name='idjenisbarangU']").val(data.jenisbarang_id);
+            // TAMBAHAN: Isi field Kode di modal edit
+            $("input[name='kodeU']").val(data.jenis_initial); 
+            
             $("input[name='jenisbarangU']").val(data.jenisbarang_nama.replace(/_/g, ' '));
             $("textarea[name='ketU']").val(data.jenisbarang_ket.replace(/_/g, ' '));
         }
@@ -106,6 +103,11 @@
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex',
                         searchable: false
+                    },
+                    // TAMBAHAN KOLOM KODE DI DATA TABLES
+                    {
+                        data: 'jenis_initial',
+                        name: 'jenis_initial',
                     },
                     {
                         data: 'jenisbarang_nama',

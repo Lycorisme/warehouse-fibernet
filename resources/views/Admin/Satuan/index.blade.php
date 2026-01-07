@@ -1,7 +1,6 @@
 @extends('Master.Layouts.app', ['title' => $title])
 
 @section('content')
-    <!-- PAGE-HEADER -->
     <div class="page-header">
         <h1 class="page-title">Satuan Barang</h1>
         <div>
@@ -11,10 +10,6 @@
             </ol>
         </div>
     </div>
-    <!-- PAGE-HEADER END -->
-
-
-    <!-- ROW -->
     <div class="row row-sm">
         <div class="col-lg-12">
             <div class="card">
@@ -22,8 +17,8 @@
                     <h3 class="card-title">Data</h3>
                     @if ($hakTambah > 0)
                         <div>
-                            <a class="modal-effect btn btn-primary-light" data-bs-effect="effect-super-scaled"
-                                data-bs-toggle="modal" href="#modaldemo8">Tambah Data
+                            <a class="modal-effect btn btn-primary-light"
+                                data-bs-effect="effect-super-scaled" data-bs-toggle="modal" href="#modaldemo8">Tambah Data
                                 <i class="fe fe-plus"></i></a>
                         </div>
                     @endif
@@ -34,7 +29,7 @@
                             class="table table-bordered text-nowrap border-bottom dataTable no-footer dtr-inline collapsed">
                             <thead>
                                 <th class="border-bottom-0" width="1%">No</th>
-                                <th class="border-bottom-0">Satuan</th>
+                                <th class="border-bottom-0" width="10%">Kode</th> <th class="border-bottom-0">Satuan</th>
                                 <th class="border-bottom-0">Keterangan</th>
                                 <th class="border-bottom-0" width="1%">Action</th>
                             </thead>
@@ -45,8 +40,6 @@
             </div>
         </div>
     </div>
-    <!-- END ROW -->
-
     @include('Admin.Satuan.tambah')
     @include('Admin.Satuan.edit')
     @include('Admin.Satuan.hapus')
@@ -54,6 +47,9 @@
     <script>
         function update(data) {
             $("input[name='idsatuanU']").val(data.satuan_id);
+            // TAMBAHAN: Isi field Kode di modal edit (ambil dari satuan_initial)
+            $("input[name='kodeU']").val(data.satuan_initial);
+            
             $("input[name='satuanU']").val(data.satuan_nama.replace(/_/g, ' '));
             $("textarea[name='ketU']").val(data.satuan_keterangan.replace(/_/g, ' '));
         }
@@ -107,6 +103,11 @@
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex',
                         searchable: false
+                    },
+                    // TAMBAHAN KOLOM DATA TABLES
+                    {
+                        data: 'satuan_initial',
+                        name: 'satuan_initial',
                     },
                     {
                         data: 'satuan_nama',

@@ -1,14 +1,20 @@
-<!-- MODAL EDIT -->
 <div class="modal fade" data-bs-backdrop="static" id="Umodaldemo8">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
-                <h6 class="modal-title">Ubah Satuan Barang</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <h6 class="modal-title">Ubah Satuan</h6><button aria-label="Close" class="btn-close"
+                    data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
                 <input type="hidden" name="idsatuanU">
+
                 <div class="form-group">
-                    <label for="satuanU" class="form-label">Satuan Barang <span class="text-danger">*</span></label>
+                    <label for="kodeU" class="form-label">Kode Initial <span class="text-danger">*</span></label>
+                    <input type="text" name="kodeU" class="form-control" placeholder="Cth: 01" maxlength="2" onkeypress="return isNumber(event)">
+                </div>
+
+                <div class="form-group">
+                    <label for="satuanU" class="form-label">Nama Satuan <span class="text-danger">*</span></label>
                     <input type="text" name="satuanU" class="form-control" placeholder="">
                 </div>
                 <div class="form-group">
@@ -29,68 +35,78 @@
 </div>
 
 @section('formEditJS')
-<script>
-    function checkFormU() {
-        const satuan = $("input[name='satuanU']").val();
-        setLoadingU(true);
-        resetValidU();
+    <script>
+        function checkFormU() {
+            const kode = $("input[name='kodeU']").val();
+            const satuan = $("input[name='satuanU']").val();
+            setLoadingU(true);
+            resetValidU();
 
-        if (satuan == "") {
-            validasi('Satuan Barang wajib di isi!', 'warning');
-            $("input[name='satuanU']").addClass('is-invalid');
-            setLoadingU(false);
-            return false;
-        } else {
-            submitFormU();
-        }
-    }
-
-    function submitFormU() {
-        const id = $("input[name='idsatuanU']").val();
-        const satuan = $("input[name='satuanU']").val();
-        const ket = $("textarea[name='ketU']").val();
-
-        $.ajax({
-            type: 'POST',
-            url: "{{url('admin/satuan/proses_ubah')}}/" + id,
-            enctype: 'multipart/form-data',
-            data: {
-                satuan: satuan,
-                ket: ket
-            },
-            success: function(data) {
-                swal({
-                    title: "Berhasil diubah!",
-                    type: "success"
-                });
-                $('#Umodaldemo8').modal('toggle');
-                table.ajax.reload(null, false);
-                resetU();
+            if (kode == "") {
+                validasi('Kode Initial wajib di isi!', 'warning');
+                $("input[name='kodeU']").addClass('is-invalid');
+                setLoadingU(false);
+                return false;
+            } else if (satuan == "") {
+                validasi('Nama Satuan wajib di isi!', 'warning');
+                $("input[name='satuanU']").addClass('is-invalid');
+                setLoadingU(false);
+                return false;
+            } else {
+                submitFormU();
             }
-        });
-    }
-
-    function resetValidU() {
-        $("input[name='satuanU']").removeClass('is-invalid');
-        $("textarea[name='ketU']").removeClass('is-invalid');
-    };
-
-    function resetU() {
-        resetValidU();
-        $("input[name='idsatuanU']").val('');
-        $("input[name='satuanU']").val('');
-        $("textarea[name='ketU']").val('');
-        setLoadingU(false);
-    }
-
-    function setLoadingU(bool) {
-        if (bool == true) {
-            $('#btnLoaderU').removeClass('d-none');
-            $('#btnSimpanU').addClass('d-none');
-        } else {
-            $('#btnSimpanU').removeClass('d-none');
-            $('#btnLoaderU').addClass('d-none');
         }
-    }
-</script>
+
+        function submitFormU() {
+            const id = $("input[name='idsatuanU']").val();
+            const kode = $("input[name='kodeU']").val();
+            const satuan = $("input[name='satuanU']").val();
+            const ket = $("textarea[name='ketU']").val();
+
+            $.ajax({
+                type: 'POST',
+                url: "{{ url('admin/satuan/proses_ubah') }}/" + id,
+                enctype: 'multipart/form-data',
+                data: {
+                    kode: kode, // Kirim kode
+                    satuan: satuan,
+                    ket: ket
+                },
+                success: function(data) {
+                    swal({
+                        title: "Berhasil diubah!",
+                        type: "success"
+                    });
+                    $('#Umodaldemo8').modal('toggle');
+                    table.ajax.reload(null, false);
+                    resetU();
+                }
+            });
+        }
+
+        function resetValidU() {
+            $("input[name='kodeU']").removeClass('is-invalid');
+            $("input[name='satuanU']").removeClass('is-invalid');
+            $("textarea[name='ketU']").removeClass('is-invalid');
+        };
+
+        function resetU() {
+            resetValidU();
+            $("input[name='idsatuanU']").val('');
+            $("input[name='kodeU']").val('');
+            $("input[name='satuanU']").val('');
+            $("textarea[name='ketU']").val('');
+            setLoadingU(false);
+        }
+
+        function setLoadingU(bool) {
+            if (bool == true) {
+                $('#btnLoaderU').removeClass('d-none');
+                $('#btnSimpanU').addClass('d-none');
+            } else {
+                $('#btnSimpanU').removeClass('d-none');
+                $('#btnLoaderU').addClass('d-none');
+            }
+        }
+    </script>
 @endsection

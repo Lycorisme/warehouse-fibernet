@@ -80,7 +80,7 @@ use Carbon\Carbon;
     </center>
 
     <center>
-        <h1 class="font-medium" style="margin-bottom: 5px;">Laporan Data Customer</h1>
+        <h1 class="font-medium" style="margin-bottom: 5px;">Laporan Data Supplier</h1>
         <h4 class="font-medium" style="margin-top: 0;">Semua Data</h4>
     </center>
 
@@ -88,7 +88,7 @@ use Carbon\Carbon;
         <thead>
             <tr>
                 <th width="5%" class="text-center">NO</th>
-                <th>NAMA CUSTOMER</th>
+                <th>NAMA SUPPLIER</th>
                 <th>NO TELEPON</th>
                 <th>ALAMAT</th>
             </tr>

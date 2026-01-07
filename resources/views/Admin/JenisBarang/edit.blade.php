@@ -1,4 +1,3 @@
-<!-- MODAL EDIT -->
 <div class="modal fade" data-bs-backdrop="static" id="Umodaldemo8">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content modal-content-demo">
@@ -7,6 +6,12 @@
             </div>
             <div class="modal-body">
                 <input type="hidden" name="idjenisbarangU">
+                
+                <div class="form-group">
+                    <label for="kodeU" class="form-label">Kode Initial <span class="text-danger">*</span></label>
+                    <input type="text" name="kodeU" class="form-control" placeholder="Cth: 01" maxlength="2" onkeypress="return isNumber(event)">
+                </div>
+
                 <div class="form-group">
                     <label for="jenisbarangU" class="form-label">Jenis Barang <span class="text-danger">*</span></label>
                     <input type="text" name="jenisbarangU" class="form-control" placeholder="">
@@ -31,11 +36,17 @@
 @section('formEditJS')
 <script>
     function checkFormU() {
+        const kode = $("input[name='kodeU']").val();
         const jenis = $("input[name='jenisbarangU']").val();
         setLoadingU(true);
         resetValidU();
 
-        if (jenis == "") {
+        if (kode == "") {
+            validasi('Kode Initial wajib di isi!', 'warning');
+            $("input[name='kodeU']").addClass('is-invalid');
+            setLoadingU(false);
+            return false;
+        } else if (jenis == "") {
             validasi('Jenis Barang wajib di isi!', 'warning');
             $("input[name='jenisbarangU']").addClass('is-invalid');
             setLoadingU(false);
@@ -47,6 +58,7 @@
 
     function submitFormU() {
         const id = $("input[name='idjenisbarangU']").val();
+        const kode = $("input[name='kodeU']").val();
         const jenis = $("input[name='jenisbarangU']").val();
         const ket = $("textarea[name='ketU']").val();
 
@@ -55,6 +67,7 @@
             url: "{{url('admin/jenisbarang/proses_ubah')}}/" + id,
             enctype: 'multipart/form-data',
             data: {
+                kode: kode, // Kirim sebagai 'kode' ke controller
                 jenisbarang: jenis,
                 ket: ket
             },
@@ -71,6 +84,7 @@
     }
 
     function resetValidU() {
+        $("input[name='kodeU']").removeClass('is-invalid');
         $("input[name='jenisbarangU']").removeClass('is-invalid');
         $("textarea[name='ketU']").removeClass('is-invalid');
     };
@@ -78,6 +92,7 @@
     function resetU() {
         resetValidU();
         $("input[name='idjenisbarangU']").val('');
+        $("input[name='kodeU']").val('');
         $("input[name='jenisbarangU']").val('');
         $("textarea[name='ketU']").val('');
         setLoadingU(false);

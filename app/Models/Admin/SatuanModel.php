@@ -13,6 +13,7 @@ class SatuanModel extends Model
     protected $fillable = [
         'satuan_nama',
         'satuan_slug',
+        'satuan_initial',
         'satuan_keterangan'
     ]; 
 }

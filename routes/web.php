@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\BarangReturController;
+use App\Http\Controllers\Admin\LapBarangReturController;
+use App\Http\Controllers\Admin\BarangRusakController;
+use App\Http\Controllers\Admin\LapBarangRusakController;
 use App\Http\Controllers\Admin\BarangController;
 use App\Http\Controllers\Admin\BarangkeluarController;
 use App\Http\Controllers\Admin\BarangmasukController;
@@ -22,6 +26,7 @@ use App\Http\Controllers\Master\UserController;
 use Illuminate\Support\Facades\Route;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,6 +37,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 
 // login admin
 Route::middleware(['preventBackHistory'])->group(function () {
@@ -92,6 +98,12 @@ Route::group(['middleware' => 'userlogin'], function () {
         Route::post('/admin/barang/proses_tambah/', [BarangController::class, 'proses_tambah'])->name('barang.store');
         Route::post('/admin/barang/proses_ubah/{barang}', [BarangController::class, 'proses_ubah']);
         Route::post('/admin/barang/proses_hapus/{barang}', [BarangController::class, 'proses_hapus']);
+
+        // --- TAMBAHKAN BARIS INI (Route untuk AJAX Generator Kode) ---
+        Route::post('/admin/barang/get-kode', [BarangController::class, 'getKode'])->name('barang.getkode');
+
+        // --- TAMBAHKAN BARIS INI (Route untuk Cetak Barcode Satuan) ---
+        Route::get('/admin/barang/cetak-barcode/{id}', [BarangController::class, 'cetakBarcode'])->name('barang.cetak_barcode');
     });
 
     Route::middleware(['checkRoleUser:/customer,menu'])->group(function () {
@@ -116,13 +128,31 @@ Route::group(['middleware' => 'userlogin'], function () {
         Route::get('/admin/barang/listbarang/{param}', [BarangController::class, 'listbarang']);
     });
 
-    Route::middleware(['checkRoleUser:/lap-barang-masuk,submenu'])->group(function () {
+    Route::middleware(['checkRoleUser:/barang-rusak,submenu'])->group(function () {
+        // Barang Rusak
+        Route::resource('/admin/barang-rusak', \App\Http\Controllers\Admin\BarangRusakController::class);
+        Route::get('/admin/barang-rusak/show/', [BarangRusakController::class, 'show'])->name('barang-rusak.getbarang-rusak');
+        Route::post('/admin/barang-rusak/proses_tambah/', [BarangRusakController::class, 'proses_tambah'])->name('barang-rusak.store');
+        Route::post('/admin/barang-rusak/proses_ubah/{barangrusak}', [BarangRusakController::class, 'proses_ubah']);
+        Route::post('/admin/barang-rusak/proses_hapus/{barangrusak}', [BarangRusakController::class, 'proses_hapus']);
+    });
+
+    Route::middleware(['checkRoleUser:/barang-keluar,submenu'])->group(function () {
         // Barang Keluar
         Route::resource('/admin/barang-keluar', \App\Http\Controllers\Admin\BarangkeluarController::class);
         Route::get('/admin/barang-keluar/show/', [BarangkeluarController::class, 'show'])->name('barang-keluar.getbarang-keluar');
         Route::post('/admin/barang-keluar/proses_tambah/', [BarangkeluarController::class, 'proses_tambah'])->name('barang-keluar.store');
         Route::post('/admin/barang-keluar/proses_ubah/{barangkeluar}', [BarangkeluarController::class, 'proses_ubah']);
         Route::post('/admin/barang-keluar/proses_hapus/{barangkeluar}', [BarangkeluarController::class, 'proses_hapus']);
+    });
+
+    Route::middleware(['checkRoleUser:/barang-retur,submenu'])->group(function () {
+        // Barang Retur
+        Route::resource('/admin/barang-retur', \App\Http\Controllers\Admin\BarangReturController::class);
+        Route::get('/admin/barang-retur/show/', [BarangReturController::class, 'show'])->name('barang-retur.getbarang-retur');
+        Route::post('/admin/barang-retur/proses_tambah/', [BarangReturController::class, 'proses_tambah'])->name('barang-retur.store');
+        Route::post('/admin/barang-retur/proses_ubah/{barangretur}', [BarangReturController::class, 'proses_ubah']);
+        Route::post('/admin/barang-retur/proses_hapus/{barangretur}', [BarangReturController::class, 'proses_hapus']);
     });
 
     Route::middleware(['checkRoleUser:/lap-barang-masuk,submenu'])->group(function () {
@@ -139,6 +169,22 @@ Route::group(['middleware' => 'userlogin'], function () {
         Route::get('/admin/lapbarangkeluar/print/', [LapBarangKeluarController::class, 'print'])->name('lap-bk.print');
         Route::get('/admin/lapbarangkeluar/pdf/', [LapBarangKeluarController::class, 'pdf'])->name('lap-bk.pdf');
         Route::get('/admin/lap-barang-keluar/show/', [LapBarangKeluarController::class, 'show'])->name('lap-bk.getlap-bk');
+    });
+
+    Route::middleware(['checkRoleUser:/lap-barang-rusak,submenu'])->group(function () {
+        // Laporan Barang Rusak
+        Route::resource('/admin/lap-barang-rusak', \App\Http\Controllers\Admin\LapBarangRusakController::class);
+        Route::get('/admin/lapbarangrusak/print/', [LapBarangRusakController::class, 'print'])->name('lap-br.print');
+        Route::get('/admin/lapbarangrusak/pdf/', [LapBarangRusakController::class, 'pdf'])->name('lap-br.pdf');
+        Route::get('/admin/lap-barang-rusak/show/', [LapBarangRusakController::class, 'show'])->name('lap-br.getlap-br');
+    });
+
+    Route::middleware(['checkRoleUser:/lap-barang-retur,submenu'])->group(function () {
+        // Laporan Barang Retur
+        Route::resource('/admin/lap-barang-retur', \App\Http\Controllers\Admin\LapBarangReturController::class);
+        Route::get('/admin/lapbarangretur/print/', [LapBarangReturController::class, 'print'])->name('lap-retur.print');
+        Route::get('/admin/lapbarangretur/pdf/', [LapBarangReturController::class, 'pdf'])->name('lap-retur.pdf');
+        Route::get('/admin/lap-barang-retur/show/', [LapBarangReturController::class, 'show'])->name('lap-retur.getlap-retur');
     });
 
     Route::middleware(['checkRoleUser:/lap-stok-barang,submenu'])->group(function () {

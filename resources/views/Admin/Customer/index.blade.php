@@ -3,11 +3,11 @@
 @section('content')
     <!-- PAGE-HEADER -->
     <div class="page-header">
-        <h1 class="page-title">Customer</h1>
+        <h1 class="page-title">Supplier</h1>
         <div>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item text-gray">Admin</li>
-                <li class="breadcrumb-item active" aria-current="page">Customer</li>
+                <li class="breadcrumb-item active" aria-current="page">Supplier</li>
             </ol>
         </div>
     </div>
@@ -36,7 +36,7 @@
                             class="table table-bordered text-nowrap border-bottom dataTable no-footer dtr-inline collapsed">
                             <thead>
                                 <th class="border-bottom-0" width="1%">No</th>
-                                <th class="border-bottom-0">Customer</th>
+                                <th class="border-bottom-0">Supplier</th>
                                 <th class="border-bottom-0">No Telp</th>
                                 <th class="border-bottom-0">Alamat</th>
                                 <th class="border-bottom-0" width="1%">Action</th>

@@ -97,6 +97,7 @@ use Carbon\Carbon;
                 <th align="center" width="1%">NO</th>
                 <th>KODE BARANG</th>
                 <th>BARANG</th>
+                <th>JENIS</th>
                 <th>STOK AWAL</th>
                 <th>JML MASUK</th>
                 <th>JML KELUAR</th>
@@ -132,6 +133,7 @@ use Carbon\Carbon;
                     <td align="center">{{ $no++ }}</td>
                     <td>{{ $d->barang_kode }}</td>
                     <td>{{ $d->barang_nama }}</td>
+                    <td>{{ $d->jenisbarang_nama }}</td>
                     <td align="center">{{ $d->barang_stok }}</td>
                     <td align="center">{{ $jmlmasuk }}</td>
                     <td align="center">{{ $jmlkeluar }}</td>

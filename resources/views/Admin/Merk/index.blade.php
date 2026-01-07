@@ -1,7 +1,6 @@
 @extends('Master.Layouts.app', ['title' => $title])
 
 @section('content')
-    <!-- PAGE-HEADER -->
     <div class="page-header">
         <h1 class="page-title">Merk Barang</h1>
         <div>
@@ -11,10 +10,6 @@
             </ol>
         </div>
     </div>
-    <!-- PAGE-HEADER END -->
-
-
-    <!-- ROW -->
     <div class="row row-sm">
         <div class="col-lg-12">
             <div class="card">
@@ -34,7 +29,7 @@
                             class="table table-bordered text-nowrap border-bottom dataTable no-footer dtr-inline collapsed">
                             <thead>
                                 <th class="border-bottom-0" width="1%">No</th>
-                                <th class="border-bottom-0">Merk</th>
+                                <th class="border-bottom-0" width="10%">Kode</th> <th class="border-bottom-0">Merk</th>
                                 <th class="border-bottom-0">Keterangan</th>
                                 <th class="border-bottom-0" width="1%">Action</th>
                             </thead>
@@ -45,8 +40,6 @@
             </div>
         </div>
     </div>
-    <!-- END ROW -->
-
     @include('Admin.Merk.tambah')
     @include('Admin.Merk.edit')
     @include('Admin.Merk.hapus')
@@ -54,6 +47,9 @@
     <script>
         function update(data) {
             $("input[name='idmerkU']").val(data.merk_id);
+            // TAMBAHAN: Isi field Kode di modal edit (ambil dari merk_initial)
+            $("input[name='kodeU']").val(data.merk_initial);
+            
             $("input[name='merkU']").val(data.merk_nama.replace(/_/g, ' '));
             $("textarea[name='ketU']").val(data.merk_keterangan.replace(/_/g, ' '));
         }
@@ -107,6 +103,11 @@
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex',
                         searchable: false
+                    },
+                    // TAMBAHAN KOLOM DATA TABLES
+                    {
+                        data: 'merk_initial',
+                        name: 'merk_initial',
                     },
                     {
                         data: 'merk_nama',
