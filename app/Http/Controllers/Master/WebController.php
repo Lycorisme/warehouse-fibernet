@@ -35,11 +35,13 @@ class WebController extends Controller
                 'web_logo' => $image->hashName(),
                 'web_nama' => $request->nmweb,
                 'web_deskripsi' => $request->desk,
+                'web_footer' => $request->footer,
             ]);
         } else {
             $web->update([
                 'web_nama' => $request->nmweb,
                 'web_deskripsi'   => $request->desk,
+                'web_footer' => $request->footer,
             ]);
         }
 

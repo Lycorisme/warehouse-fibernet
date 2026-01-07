@@ -39,9 +39,9 @@
                         <span class="text-muted fw-semibold">Nama Website</span>
                         <span class="text-dark fw-bold fs-15">{{$d->web_nama}}</span>
                     </div>
-                    <div class="list-group-item d-flex flex-column px-0 py-3">
-                        <span class="text-muted fw-semibold mb-2">Deskripsi Website</span>
-                        <p class="text-dark mb-0 fs-14 leading-relaxed">{{$d->web_deskripsi == "" ? "Tidak ada deskripsi." : $d->web_deskripsi}}</p>
+                    <div class="list-group-item d-flex flex-column px-0 py-3 border-bottom-0">
+                        <span class="text-muted fw-semibold mb-2">Teks Footer Website</span>
+                        <p class="text-dark mb-0 fs-14 leading-relaxed">{{$d->web_footer == "" ? "Tidak ada footer." : $d->web_footer}}</p>
                     </div>
                 </div>
             </div>
@@ -82,9 +82,17 @@
                         </div>
                     </div>
 
-                    <div class="form-group mb-0">
+                    <div class="form-group mb-4">
                         <label class="form-label fw-bold text-muted fs-12 mb-1">Deskripsi & Meta Data</label>
-                        <textarea name="desk" rows="4" class="form-control" placeholder="Tuliskan deskripsi singkat mengenai website ini...">{{$d->web_deskripsi}}</textarea>
+                        <textarea name="desk" rows="3" class="form-control" placeholder="Tuliskan deskripsi singkat mengenai website ini...">{{$d->web_deskripsi}}</textarea>
+                    </div>
+
+                    <div class="form-group mb-0">
+                        <label class="form-label fw-bold text-muted fs-12 mb-1">Teks Footer</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-white border-end-0"><i class="fe fe-type text-muted"></i></span>
+                            <input type="text" class="form-control border-start-0" name="footer" value="{{$d->web_footer}}" placeholder="Contoh: Digital Agency">
+                        </div>
                     </div>
                 </div>
                 <div class="card-footer border-top-0 pt-0 pb-4 mt-auto">
