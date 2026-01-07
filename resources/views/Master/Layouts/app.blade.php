@@ -62,7 +62,7 @@ $appreance = AppreanceModel::where('user_id', '=', Session::get('user')->user_id
             border-right: none !important;
         }
 
-        .side-menu__item.active {
+        .side-menu__item.active, .slide-item.active {
             background: var(--primary-gradient) !important;
             color: #fff !important;
             box-shadow: 0 4px 15px rgba(68, 84, 195, 0.3) !important;
@@ -70,15 +70,50 @@ $appreance = AppreanceModel::where('user_id', '=', Session::get('user')->user_id
             margin: 4px 12px !important;
         }
 
-        .side-menu__item {
+        .side-menu__item, .slide-item {
             transition: all 0.3s ease !important;
             margin: 4px 12px !important;
             border-radius: 8px !important;
+            display: flex !important;
+            align-items: center !important;
+            padding: 10px 15px !important;
+            color: #495057 !important;
+            font-weight: 500 !important;
         }
 
-        .side-menu__item:hover:not(.active) {
-            background: rgba(68, 84, 195, 0.05) !important;
+        .side-menu__item:hover:not(.active), .slide-item:hover:not(.active) {
+            background: rgba(68, 84, 195, 0.08) !important;
             color: var(--primary-bg) !important;
+            transform: translateX(8px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .slide.is-expanded > .side-menu__item {
+            color: var(--primary-bg) !important;
+            background: rgba(68, 84, 195, 0.05) !important;
+            border-left: 3px solid var(--primary-bg) !important;
+            border-radius: 0 8px 8px 0 !important;
+        }
+
+        .slide-menu {
+            padding: 5px 0 !important;
+            margin: 0 0 0 25px !important;
+            border-left: 1px solid #ebeff5 !important;
+        }
+
+        .slide-item {
+            margin: 4px 12px !important;
+            font-size: 13px !important;
+            padding: 8px 15px !important;
+        }
+
+        .slide-item.active {
+            font-weight: 700 !important;
+        }
+
+        /* Adjustments for the icons in active state */
+        .side-menu__item.active .side-menu__icon, .slide-item.active .side-menu__icon {
+            color: #fff !important;
         }
 
         .app-header {

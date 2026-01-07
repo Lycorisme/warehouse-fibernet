@@ -10,63 +10,32 @@
             </ol>
         </div>
     </div>
-    <div class="row">
-        <div class="col-xl-4 col-md-12">
-            <div class="card overflow-hidden">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <div class="counter-icon bg-secondary-gradient box-secondary-shadow text-white me-3">
-                            <i class="fe fe-grid"></i>
-                        </div>
-                        <div>
-                            <h6 class="text-muted mb-1 text-uppercase fs-12 fw-bold">Total Kategori Jenis</h6>
-                            <h3 class="mb-0 number-font fs-24 fw-bold">{{$totalJenis}}</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-8 col-md-12">
-             <div class="card bg-primary-transparent bg-opacity-10 border-0 p-4">
-                <div class="d-flex align-items-center">
-                    <div class="me-3">
-                        <i class="fe fe-info fs-30 text-primary"></i>
-                    </div>
-                    <div>
-                        <h5 class="fw-bold text-primary mb-1">Manajemen Jenis Barang</h5>
-                        <p class="text-muted mb-0 fs-13">Gunakan halaman ini untuk mengelompokkan barang berdasarkan kategorinya agar manajemen stok lebih terorganisir.</p>
-                    </div>
-                </div>
-             </div>
-        </div>
-    </div>
-
-    <div class="row row-sm mt-4">
+    <div class="row mt-4">
         <div class="col-lg-12">
-            <div class="card shadow-sm border-0">
-                <div class="card-header border-bottom-0 pb-0 justify-content-between">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header border-bottom-0 pb-0 d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center">
                     <div>
-                        <h3 class="card-title fw-bold">Daftar Jenis Barang</h3>
-                        <p class="text-muted fs-12 mb-0">Kelola informasi kategori barang Anda di sini.</p>
+                        <h3 class="card-title fw-bold fs-18">Daftar Jenis Barang</h3>
+                        <p class="text-muted fs-12 mb-0">Kelola dan lihat data kategori barang yang tersedia.</p>
                     </div>
                     @if ($hakTambah > 0)
-                        <div>
-                            <a class="modal-effect btn btn-primary box-primary-shadow"
+                        <div class="mt-3 mt-sm-0">
+                            <a class="modal-effect btn btn-primary box-primary-shadow px-4 py-2"
                                 data-bs-effect="effect-super-scaled" data-bs-toggle="modal" href="#modaldemo8">
-                                <i class="fe fe-plus me-2"></i>Tambah Jenis</a>
+                                <i class="fe fe-plus-circle me-2"></i>Tambah Kategori</a>
                         </div>
                     @endif
                 </div>
                 <div class="card-body pt-4">
                     <div class="table-responsive">
                         <table id="table-1" width="100%"
-                            class="table table-hover text-nowrap border-bottom dataTable no-footer">
-                            <thead class="bg-light">
-                                <th class="border-bottom-0" width="1%">No</th>
-                                <th class="border-bottom-0" width="10%">Kode</th> 
-                                <th class="border-bottom-0">Nama Kategori</th>
-                                <th class="border-bottom-0">Deskripsi</th>
-                                <th class="border-bottom-0" width="1%">Opsi</th>
+                            class="table table-hover border-bottom dataTable no-footer">
+                            <thead class="bg-light-50">
+                                <th class="border-bottom-0 text-muted fw-bold" width="1%">NO</th>
+                                <th class="border-bottom-0 text-muted fw-bold" width="10%">KODE</th> 
+                                <th class="border-bottom-0 text-muted fw-bold">NAMA KATEGORI</th>
+                                <th class="border-bottom-0 text-muted fw-bold">DESKRIPSI</th>
+                                <th class="border-bottom-0 text-muted fw-bold text-end" width="1%">ACTION</th>
                             </thead>
                             <tbody></tbody>
                         </table>
