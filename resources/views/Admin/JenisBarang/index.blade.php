@@ -10,28 +10,63 @@
             </ol>
         </div>
     </div>
-    <div class="row row-sm">
+    <div class="row">
+        <div class="col-xl-4 col-md-12">
+            <div class="card overflow-hidden">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="counter-icon bg-secondary-gradient box-secondary-shadow text-white me-3">
+                            <i class="fe fe-grid"></i>
+                        </div>
+                        <div>
+                            <h6 class="text-muted mb-1 text-uppercase fs-12 fw-bold">Total Kategori Jenis</h6>
+                            <h3 class="mb-0 number-font fs-24 fw-bold">{{$totalJenis}}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-8 col-md-12">
+             <div class="card bg-primary-transparent bg-opacity-10 border-0 p-4">
+                <div class="d-flex align-items-center">
+                    <div class="me-3">
+                        <i class="fe fe-info fs-30 text-primary"></i>
+                    </div>
+                    <div>
+                        <h5 class="fw-bold text-primary mb-1">Manajemen Jenis Barang</h5>
+                        <p class="text-muted mb-0 fs-13">Gunakan halaman ini untuk mengelompokkan barang berdasarkan kategorinya agar manajemen stok lebih terorganisir.</p>
+                    </div>
+                </div>
+             </div>
+        </div>
+    </div>
+
+    <div class="row row-sm mt-4">
         <div class="col-lg-12">
-            <div class="card">
-                <div class="card-header justify-content-between">
-                    <h3 class="card-title">Data</h3>
+            <div class="card shadow-sm border-0">
+                <div class="card-header border-bottom-0 pb-0 justify-content-between">
+                    <div>
+                        <h3 class="card-title fw-bold">Daftar Jenis Barang</h3>
+                        <p class="text-muted fs-12 mb-0">Kelola informasi kategori barang Anda di sini.</p>
+                    </div>
                     @if ($hakTambah > 0)
                         <div>
-                            <a class="modal-effect btn btn-primary-light"
-                                data-bs-effect="effect-super-scaled" data-bs-toggle="modal" href="#modaldemo8">Tambah Data
-                                <i class="fe fe-plus"></i></a>
+                            <a class="modal-effect btn btn-primary box-primary-shadow"
+                                data-bs-effect="effect-super-scaled" data-bs-toggle="modal" href="#modaldemo8">
+                                <i class="fe fe-plus me-2"></i>Tambah Jenis</a>
                         </div>
                     @endif
                 </div>
-                <div class="card-body">
+                <div class="card-body pt-4">
                     <div class="table-responsive">
                         <table id="table-1" width="100%"
-                            class="table table-bordered text-nowrap border-bottom dataTable no-footer dtr-inline collapsed">
-                            <thead>
+                            class="table table-hover text-nowrap border-bottom dataTable no-footer">
+                            <thead class="bg-light">
                                 <th class="border-bottom-0" width="1%">No</th>
-                                <th class="border-bottom-0" width="10%">Kode</th> <th class="border-bottom-0">Jenis Barang</th>
-                                <th class="border-bottom-0">Keterangan</th>
-                                <th class="border-bottom-0" width="1%">Action</th>
+                                <th class="border-bottom-0" width="10%">Kode</th> 
+                                <th class="border-bottom-0">Nama Kategori</th>
+                                <th class="border-bottom-0">Deskripsi</th>
+                                <th class="border-bottom-0" width="1%">Opsi</th>
                             </thead>
                             <tbody></tbody>
                         </table>

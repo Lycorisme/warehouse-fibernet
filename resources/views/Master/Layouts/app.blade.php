@@ -49,6 +49,80 @@ $appreance = AppreanceModel::where('user_id', '=', Session::get('user')->user_id
     <link id="theme" rel="stylesheet" type="text/css" media="all"
         href="{{ url('/assets/colors/color1.css') }}" />
     <style>
+        :root {
+            --primary-bg: #4454c3;
+            --primary-gradient: linear-gradient(to bottom right, #4454c3 0%, #2d3dab 100%);
+            --secondary-gradient: linear-gradient(to bottom right, #c344ad 0%, #ab2d8e 100%);
+            --glass-bg: rgba(255, 255, 255, 0.9);
+            --sidebar-width: 270px;
+        }
+
+        .app-sidebar {
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.05) !important;
+            border-right: none !important;
+        }
+
+        .side-menu__item.active {
+            background: var(--primary-gradient) !important;
+            color: #fff !important;
+            box-shadow: 0 4px 15px rgba(68, 84, 195, 0.3) !important;
+            border-radius: 8px !important;
+            margin: 4px 12px !important;
+        }
+
+        .side-menu__item {
+            transition: all 0.3s ease !important;
+            margin: 4px 12px !important;
+            border-radius: 8px !important;
+        }
+
+        .side-menu__item:hover:not(.active) {
+            background: rgba(68, 84, 195, 0.05) !important;
+            color: var(--primary-bg) !important;
+        }
+
+        .app-header {
+            background: var(--glass-bg) !important;
+            backdrop-filter: blur(10px) !important;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02) !important;
+        }
+
+        .card {
+            border-radius: 12px !important;
+            border: none !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
+            transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08) !important;
+        }
+
+        .page-title {
+            font-weight: 700 !important;
+            letter-spacing: -0.5px !important;
+        }
+
+        .btn {
+            border-radius: 8px !important;
+            font-weight: 600 !important;
+            padding: 8px 20px !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .btn-primary-light {
+            background: rgba(68, 84, 195, 0.1) !important;
+            color: var(--primary-bg) !important;
+            border: none !important;
+        }
+
+        .btn-primary-light:hover {
+            background: var(--primary-bg) !important;
+            color: #fff !important;
+        }
+
         modal.fade {
             z-index: 1050 !important;
         }
@@ -62,7 +136,7 @@ $appreance = AppreanceModel::where('user_id', '=', Session::get('user')->user_id
         }
 
         ::-webkit-scrollbar-track {
-            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
             background-color: #F5F5F5;
             border-radius: 10px;
         }
@@ -79,17 +153,44 @@ $appreance = AppreanceModel::where('user_id', '=', Session::get('user')->user_id
         }
 
         ::-webkit-scrollbar-thumb {
-            background-color: #777;
+            background-color: #ccc;
             border-radius: 10px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background-color: #777;
-            border-radius: 10px;
+            background-color: #aaa;
+        }
+        .dataTables_wrapper .dataTables_filter input {
+            border: 1px solid rgba(0,0,0,0.1) !important;
+            border-radius: 8px !important;
+            padding: 6px 12px !important;
+            margin-left: 10px !important;
         }
 
-        ::-webkit-scrollbar-thumb {
-            background-color: #777 !important;
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            border-radius: 6px !important;
+            border: none !important;
+            margin: 0 2px !important;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+            background: var(--primary-gradient) !important;
+            color: #fff !important;
+            box-shadow: 0 2px 8px rgba(68, 84, 195, 0.2) !important;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+            background: rgba(68, 84, 195, 0.1) !important;
+            color: var(--primary-bg) !important;
+        }
+
+        .table thead th {
+            text-transform: uppercase !important;
+            font-size: 11px !important;
+            letter-spacing: 0.5px !important;
+            font-weight: 700 !important;
+            color: #8e9cad !important;
+            border-bottom: 2px solid #f0f0f2 !important;
         }
     </style>
 </head>

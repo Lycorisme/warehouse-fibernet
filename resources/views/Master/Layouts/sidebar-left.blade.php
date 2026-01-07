@@ -54,7 +54,7 @@
              <ul class="side-menu">
                  @if(count($menu) > 0)
                  <li class="sub-category">
-                     <h3>Menu</h3>
+                     <h3 class="fw-bold text-uppercase fs-10 tracking-widest text-muted" style="letter-spacing: 1px;">Menu Utama</h3>
                  </li>
                  @endif
                  @foreach($menu as $m)
@@ -89,7 +89,7 @@
                  @endforeach
 
                  <li class="sub-category">
-                     <h3>Other</h3>
+                     <h3 class="fw-bold text-uppercase fs-10 tracking-widest text-muted" style="letter-spacing: 1px;">Sistem & Pengaturan</h3>
                  </li>
 
                  <?php $getSetting = AksesModel::where(array('role_id' => Session::get('user')->role_id, 'othermenu_id' => 1, 'akses_type' => 'view'))->count(); ?>

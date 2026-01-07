@@ -103,17 +103,17 @@
                                 </div>
                             </div>
 
-                            <!-- SIDE-MENU -->
+                            <!-- PROFILE -->
                             <div class="dropdown d-flex profile-1">
-                                <a href="javascript:void(0)" data-bs-toggle="dropdown" class="nav-link leading-none d-flex">
-                                    <div class="text-end">
-                                        <h5 class="text-dark mb-0 me-4 fs-14 fw-semibold">{{Session::get('user')->user_nmlengkap}}</h5>
-                                        <small class="text-muted me-4">{{Session::get('user')->role_title}}</small>
+                                <a href="javascript:void(0)" data-bs-toggle="dropdown" class="nav-link leading-none d-flex align-items-center">
+                                    <div class="text-end me-3 d-none d-lg-block">
+                                        <h6 class="text-dark mb-0 fw-bold fs-13">{{Session::get('user')->user_nmlengkap}}</h6>
+                                        <small class="text-muted fs-11 text-uppercase fw-bold" style="letter-spacing: 0.5px;">{{Session::get('user')->role_title}}</small>
                                     </div>
                                     @if(Session::get('user')->user_foto == 'undraw_profile.svg')
-                                    <img src="{{url('/assets/default/users/undraw_profile.svg')}}" alt="profile-user" class="avatar  profile-user brround cover-image">
+                                    <img src="{{url('/assets/default/users/undraw_profile.svg')}}" alt="profile-user" class="avatar profile-user brround cover-image shadow-sm border" style="width: 38px; height: 38px;">
                                     @else
-                                    <img class="avatar profile-user brround cover-image" src="{{asset('storage/users/'.Session::get('user')->user_foto)}}" alt="avatar">
+                                    <img class="avatar profile-user brround cover-image shadow-sm border" src="{{asset('storage/users/'.Session::get('user')->user_foto)}}" alt="avatar" style="width: 38px; height: 38px;">
                                     @endif
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
