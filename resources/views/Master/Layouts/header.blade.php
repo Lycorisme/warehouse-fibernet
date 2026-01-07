@@ -1,137 +1,84 @@
 <!-- app-Header -->
 <div class="app-header header sticky">
     <div class="container-fluid main-container">
-        <div class="d-flex">
+        <div class="d-flex align-items-center">
             <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-bs-toggle="sidebar" href="javascript:void(0)"></a>
-            <!-- sidebar-toggle-->
-            <!-- <a class="logo-horizontal d-flex justify-center" href="index.html">
-                <img src="../assets/images/brand/logo.png" class="header-brand-img desktop-logo" alt="logo">
-                <img src="../assets/images/brand/logo-3.png" class="header-brand-img light-logo1" alt="logo">
-            </a> -->
+            
             <a class="logo-horizontal" href="{{url('/')}}">
                 <div class="header-brand-img desktop-logo">
-                    <div class="d-flex justify-content-center align-items-center">
+                    <div class="d-flex align-items-center">
                         @if($web->web_logo == '' || $web->web_logo == 'default.png')
-                        <img src="{{url('/assets/default/web/default.png')}}" height="40px" class="me-1" alt="logo">
+                        <img src="{{url('/assets/default/web/default.png')}}" height="32" class="me-2" alt="logo">
                         @else
-                        <img src="{{asset('storage/web/' . $web->web_logo)}}" height="40px" class="me-1" alt="logo">
+                        <img src="{{asset('storage/web/' . $web->web_logo)}}" height="32" class="me-2" alt="logo">
                         @endif
-                        <h4 class="fw-bold mt-4 text-white text-uppercase text-truncate">{{$web->web_nama}}</h4>
+                        <h4 class="fw-bold mb-0 text-white text-uppercase" style="font-size: 16px; letter-spacing: 0.5px;">{{$web->web_nama}}</h4>
                     </div>
                 </div>
                 <div class="header-brand-img light-logo1">
-                    <div class="d-flex justify-content-center align-items-center">
+                    <div class="d-flex align-items-center">
                         @if($web->web_logo == '' || $web->web_logo == 'default.png')
-                        <img src="{{url('/assets/default/web/default.png')}}" height="40px" class="me-1" alt="logo">
+                        <img src="{{url('/assets/default/web/default.png')}}" height="32" class="me-2" alt="logo">
                         @else
-                        <img src="{{asset('storage/web/' . $web->web_logo)}}" height="40px" class="me-1" alt="logo">
+                        <img src="{{asset('storage/web/' . $web->web_logo)}}" height="32" class="me-2" alt="logo">
                         @endif
-                        <h4 class="fw-bold mt-4 text-black text-uppercase text-truncate">{{$web->web_nama}}</h4>
+                        <h4 class="fw-bold mb-0 text-dark text-uppercase" style="font-size: 16px; letter-spacing: 0.5px;">{{$web->web_nama}}</h4>
                     </div>
                 </div>
             </a>
-            <!-- LOGO -->
+
             <div class="d-flex order-lg-2 ms-auto header-right-icons">
-                <!-- SEARCH -->
                 <button class="navbar-toggler navresponsive-toggler d-lg-none ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon fe fe-more-vertical"></span>
                 </button>
                 <div class="navbar navbar-collapse responsive-navbar p-0">
                     <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
-                        <div class="d-flex justify-content-between order-lg-2">
-                            <!-- Theme-Layout -->
+                        <div class="d-flex order-lg-2 align-items-center">
+                            
+                            <!-- Fullscreen -->
                             <div class="dropdown d-flex">
                                 <a class="nav-link icon full-screen-link nav-link-bg">
                                     <i class="fe fe-minimize fullscreen-button"></i>
                                 </a>
                             </div>
-                            <!-- FULL-SCREEN -->
-                            <div class="dropdown d-none notifications">
-                                <a class="nav-link icon" data-bs-toggle="dropdown"><i class="fe fe-bell"></i><span class=" pulse-danger"></span>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                    <div class="drop-heading border-bottom">
-                                        <div class="d-flex">
-                                            <h6 class="mt-1 mb-0 fs-16 fw-semibold text-dark">Notifications
-                                            </h6>
-                                        </div>
-                                    </div>
-                                    <div class="notifications-menu">
-                                        <a class="dropdown-item d-flex" href="notify-list.html">
-                                            <div class="me-3 notifyimg  bg-primary brround box-shadow-primary">
-                                                <i class="fe fe-mail"></i>
-                                            </div>
-                                            <div class="mt-1 wd-80p">
-                                                <h5 class="notification-label mb-1">New Application received
-                                                </h5>
-                                                <span class="notification-subtext">3 days ago</span>
-                                            </div>
-                                        </a>
-                                        <a class="dropdown-item d-flex" href="notify-list.html">
-                                            <div class="me-3 notifyimg  bg-secondary brround box-shadow-secondary">
-                                                <i class="fe fe-check-circle"></i>
-                                            </div>
-                                            <div class="mt-1 wd-80p">
-                                                <h5 class="notification-label mb-1">Project has been
-                                                    approved</h5>
-                                                <span class="notification-subtext">2 hours ago</span>
-                                            </div>
-                                        </a>
-                                        <a class="dropdown-item d-flex" href="notify-list.html">
-                                            <div class="me-3 notifyimg  bg-success brround box-shadow-success">
-                                                <i class="fe fe-shopping-cart"></i>
-                                            </div>
-                                            <div class="mt-1 wd-80p">
-                                                <h5 class="notification-label mb-1">Your Product Delivered
-                                                </h5>
-                                                <span class="notification-subtext">30 min ago</span>
-                                            </div>
-                                        </a>
-                                        <a class="dropdown-item d-flex" href="notify-list.html">
-                                            <div class="me-3 notifyimg bg-pink brround box-shadow-pink">
-                                                <i class="fe fe-user-plus"></i>
-                                            </div>
-                                            <div class="mt-1 wd-80p">
-                                                <h5 class="notification-label mb-1">Friend Requests</h5>
-                                                <span class="notification-subtext">1 day ago</span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="dropdown-divider m-0"></div>
-                                    <a href="notify-list.html" class="dropdown-item text-center p-3 text-muted">View all
-                                        Notification</a>
-                                </div>
-                            </div>
 
-                            <!-- PROFILE -->
-                            <div class="dropdown d-flex profile-1">
+                            <!-- Profil Pengguna -->
+                            <div class="dropdown d-flex profile-1 ms-3">
                                 <a href="javascript:void(0)" data-bs-toggle="dropdown" class="nav-link leading-none d-flex align-items-center">
                                     <div class="text-end me-3 d-none d-lg-block">
-                                        <h6 class="text-dark mb-0 fw-bold fs-13">{{Session::get('user')->user_nmlengkap}}</h6>
-                                        <small class="text-muted fs-11 text-uppercase fw-bold" style="letter-spacing: 0.5px;">{{Session::get('user')->role_title}}</small>
+                                        <h6 class="text-dark mb-0 fw-bold fs-13">{{ session('user')->user_nmlengkap }}</h6>
+                                        <small class="text-muted fs-11 text-uppercase fw-bold" style="letter-spacing: 0.5px;">{{ session('user')->role_title }}</small>
                                     </div>
-                                    @if(Session::get('user')->user_foto == 'undraw_profile.svg')
-                                    <img src="{{url('/assets/default/users/undraw_profile.svg')}}" alt="profile-user" class="avatar profile-user brround cover-image shadow-sm border" style="width: 38px; height: 38px;">
-                                    @else
-                                    <img class="avatar profile-user brround cover-image shadow-sm border" src="{{asset('storage/users/'.Session::get('user')->user_foto)}}" alt="avatar" style="width: 38px; height: 38px;">
-                                    @endif
+                                    <div class="header-avatar-wrapper position-relative" style="width: 50px; height: 50px;">
+                                        @php
+                                            $userFoto = session('user')->user_foto;
+                                            $fotoPath = ($userFoto && $userFoto != 'undraw_profile.svg') 
+                                                ? asset('storage/users/' . $userFoto) 
+                                                : url('/assets/default/users/undraw_profile.svg');
+                                        @endphp
+                                        <img src="{{ $fotoPath }}" alt="profile" class="rounded-circle shadow-sm border" style="width: 100%; height: 100%; object-fit: cover; display: block; border-width: 2px !important;">
+                                        <span class="avatar-status bg-success" style="width: 14px; height: 14px; bottom: 1px; right: 1px; border: 2px solid #fff; position: absolute; border-radius: 50%;"></span>
+                                    </div>
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                    <!-- <div class="drop-heading">
+                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow shadow-lg border-0">
+                                    <div class="drop-heading border-bottom p-3">
                                         <div class="text-center">
-                                            <h5 class="text-dark mb-0 fs-14 fw-semibold">{{Session::get('user')->user_nmlengkap}}</h5>
-                                            <small class="text-muted">{{Session::get('user')->role_title}}</small>
+                                            <h5 class="text-dark mb-0 fs-14 fw-bold">{{Session::get('user')->user_nmlengkap}}</h5>
+                                            <small class="text-muted fs-11 text-uppercase">{{Session::get('user')->role_title}}</small>
                                         </div>
-                                    </div> -->
-                                    <!-- <div class="dropdown-divider m-0"></div> -->
-                                    <a class="dropdown-item" href="{{url('/admin/profile')}}/{{Session::get('user')->user_id}}">
-                                        <i class="dropdown-icon fe fe-user"></i> Profile
+                                    </div>
+                                    <a class="dropdown-item d-flex align-items-center" href="{{url('/admin/profile')}}/{{Session::get('user')->user_id}}">
+                                        <i class="fe fe-user me-3 fs-16 text-primary"></i> 
+                                        <span>Profil Saya</span>
                                     </a>
-                                    <a class="dropdown-item" href="{{url('/admin/appreance')}}">
-                                        <i class="dropdown-icon fe fe-layout"></i> Tampilan / Tema
+                                    <a class="dropdown-item d-flex align-items-center" href="{{url('/admin/appreance')}}">
+                                        <i class="fe fe-grid me-3 fs-16 text-success"></i> 
+                                        <span>Tampilan</span>
                                     </a>
-                                    <a class="dropdown-item" data-bs-effect="effect-super-scaled" data-bs-toggle="modal" href="#modalLogout">
-                                        <i class="dropdown-icon fe fe-log-out"></i> Log out
+                                    <div class="dropdown-divider m-0 opacity-50"></div>
+                                    <a class="dropdown-item d-flex align-items-center text-danger" data-bs-effect="effect-super-scaled" data-bs-toggle="modal" href="#modalLogout">
+                                        <i class="fe fe-power me-3 fs-16"></i> 
+                                        <span>Keluar</span>
                                     </a>
                                 </div>
                             </div>

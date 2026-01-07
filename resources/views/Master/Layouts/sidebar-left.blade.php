@@ -11,42 +11,35 @@
  <div class="sticky">
      <div class="app-sidebar__overlay" data-bs-toggle="sidebar"></div>
      <div class="app-sidebar">
-         <div class="side-header">
-             <a class="header-brand1" href="{{url('/admin')}}">
-                 @if($web->web_logo == '' || $web->web_logo == 'default.png')
-                 <img src="{{url('/assets/default/web/default.png')}}" height="40px" class="header-brand-img toggle-logo" alt="logo">
-                 <div class="header-brand-img desktop-logo">
-                     <div class="d-flex align-items-center">
-                         <img src="{{url('/assets/default/web/default.png')}}" height="40px" class="me-1" alt="logo">
-                         <h4 class="fw-bold mt-4 text-white text-uppercase text-truncate">{{$web->web_nama}}</h4>
-                     </div>
-                 </div>
-                 <img src="{{url('/assets/default/web/default.png')}}" height="40px" class="header-brand-img light-logo" alt="logo">
-                 <div class="header-brand-img light-logo1">
-                     <div class="d-flex align-items-center">
-                         <img src="{{url('/assets/default/web/default.png')}}" height="40px" class="me-1" alt="logo">
-                         <h4 class="fw-bold mt-4 text-black text-uppercase text-truncate">{{$web->web_nama}}</h4>
-                     </div>
-                 </div>
-                 @else
-                 <img src="{{asset('storage/web/' . $web->web_logo)}}" height="40px" class="header-brand-img toggle-logo" alt="logo">
-                 <div class="header-brand-img desktop-logo">
-                     <div class="d-flex align-items-center">
-                         <img src="{{asset('storage/web/' . $web->web_logo)}}" height="40px" class="me-1" alt="logo">
-                         <h4 class="fw-bold mt-4 text-white text-uppercase text-truncate">{{$web->web_nama}}</h4>
-                     </div>
-                 </div>
-                 <img src="{{asset('storage/web/' . $web->web_logo)}}" height="40px" class="header-brand-img light-logo" alt="logo">
-                 <div class="header-brand-img light-logo1">
-                     <div class="d-flex align-items-center">
-                         <img src="{{asset('storage/web/' . $web->web_logo)}}" height="40px" class="me-1" alt="logo">
-                         <h4 class="fw-bold mt-4 text-black text-uppercase text-truncate">{{$web->web_nama}}</h4>
-                     </div>
-                 </div>
-                 @endif
-             </a>
-             <!-- LOGO -->
-         </div>
+        <div class="side-header border-bottom-0 pb-0 shadow-none bg-transparent">
+            <a class="header-brand1" href="{{url('/admin')}}">
+                <div class="header-brand-img desktop-logo">
+                    <div class="d-flex align-items-center px-4 py-2">
+                        @if($web->web_logo == '' || $web->web_logo == 'default.png')
+                        <img src="{{url('/assets/default/web/default.png')}}" height="32" class="me-2" alt="logo">
+                        @else
+                        <img src="{{asset('storage/web/' . $web->web_logo)}}" height="32" class="me-2" alt="logo">
+                        @endif
+                        <h4 class="fw-bold mb-0 text-white text-uppercase" style="font-size: 16px; letter-spacing: 0.5px;">{{$web->web_nama}}</h4>
+                    </div>
+                </div>
+                <div class="header-brand-img light-logo1">
+                    <div class="d-flex align-items-center px-4 py-2">
+                        @if($web->web_logo == '' || $web->web_logo == 'default.png')
+                        <img src="{{url('/assets/default/web/default.png')}}" height="32" class="me-2" alt="logo">
+                        @else
+                        <img src="{{asset('storage/web/' . $web->web_logo)}}" height="32" class="me-2" alt="logo">
+                        @endif
+                        <h4 class="fw-bold mb-0 text-dark text-uppercase" style="font-size: 16px; letter-spacing: 0.5px;">{{$web->web_nama}}</h4>
+                    </div>
+                </div>
+                @if($web->web_logo == '' || $web->web_logo == 'default.png')
+                <img src="{{url('/assets/default/web/default.png')}}" height="32" class="header-brand-img toggle-logo" alt="logo">
+                @else
+                <img src="{{asset('storage/web/' . $web->web_logo)}}" height="32" class="header-brand-img toggle-logo" alt="logo">
+                @endif
+            </a>
+        </div>
          <div class="main-sidemenu">
              <div class="slide-left disabled" id="slide-left"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24">
                      <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" />

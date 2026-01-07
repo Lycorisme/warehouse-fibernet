@@ -50,94 +50,104 @@ $appreance = AppreanceModel::where('user_id', '=', Session::get('user')->user_id
         href="{{ url('/assets/colors/color1.css') }}" />
     <style>
         :root {
-            --primary-bg: #4454c3;
-            --primary-gradient: linear-gradient(to bottom right, #4454c3 0%, #2d3dab 100%);
-            --secondary-gradient: linear-gradient(to bottom right, #c344ad 0%, #ab2d8e 100%);
-            --glass-bg: rgba(255, 255, 255, 0.9);
+            --primary-bg: #4f46e5;
+            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            --secondary-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            --glass-bg: rgba(255, 255, 255, 0.95);
             --sidebar-width: 270px;
         }
 
         .app-sidebar {
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.05) !important;
-            border-right: none !important;
+            background: #fff !important;
+            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.03) !important;
+            border-right: 1px solid rgba(0, 0, 0, 0.04) !important;
+        }
+
+        .sub-category {
+            padding: 20px 25px 10px !important;
+        }
+
+        .sub-category h3 {
+            font-size: 10px !important;
+            font-weight: 800 !important;
+            color: #94a3b8 !important;
+            letter-spacing: 1.5px !important;
+            text-transform: uppercase !important;
         }
 
         .side-menu__item.active, .slide-item.active {
             background: var(--primary-gradient) !important;
             color: #fff !important;
-            box-shadow: 0 4px 15px rgba(68, 84, 195, 0.3) !important;
-            border-radius: 8px !important;
-            margin: 4px 12px !important;
+            box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.3) !important;
+            border-radius: 10px !important;
+            margin: 4px 15px !important;
         }
 
         .side-menu__item, .slide-item {
-            transition: all 0.3s ease !important;
-            margin: 4px 12px !important;
-            border-radius: 8px !important;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            margin: 4px 15px !important;
+            border-radius: 10px !important;
             display: flex !important;
             align-items: center !important;
-            padding: 10px 15px !important;
-            color: #495057 !important;
+            padding: 11px 16px !important;
+            color: #64748b !important;
             font-weight: 500 !important;
+            font-size: 14px !important;
         }
 
         .side-menu__item:hover:not(.active), .slide-item:hover:not(.active) {
-            background: rgba(68, 84, 195, 0.08) !important;
+            background: #f8fafc !important;
             color: var(--primary-bg) !important;
-            transform: translateX(8px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-        }
-
-        .slide.is-expanded > .side-menu__item {
-            color: var(--primary-bg) !important;
-            background: rgba(68, 84, 195, 0.05) !important;
-            border-left: 3px solid var(--primary-bg) !important;
-            border-radius: 0 8px 8px 0 !important;
+            transform: translateX(4px);
         }
 
         .slide-menu {
-            padding: 5px 0 !important;
-            margin: 0 0 0 25px !important;
-            border-left: 1px solid #ebeff5 !important;
-        }
-
-        .slide-item {
-            margin: 4px 12px !important;
-            font-size: 13px !important;
-            padding: 8px 15px !important;
-        }
-
-        .slide-item.active {
-            font-weight: 700 !important;
-        }
-
-        /* Adjustments for the icons in active state */
-        .side-menu__item.active .side-menu__icon, .slide-item.active .side-menu__icon {
-            color: #fff !important;
+            padding: 4px 0 !important;
+            margin: 0 0 0 35px !important;
+            border-left: 1px solid #f1f5f9 !important;
         }
 
         .app-header {
-            background: var(--glass-bg) !important;
-            backdrop-filter: blur(10px) !important;
+            background: rgba(255, 255, 255, 0.8) !important;
+            backdrop-filter: blur(12px) !important;
             border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02) !important;
-        }
-
-        .card {
-            border-radius: 12px !important;
-            border: none !important;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
-            transition: transform 0.3s ease, box-shadow 0.3s ease !important;
-        }
-
-        .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08) !important;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
         }
 
         .page-title {
-            font-weight: 700 !important;
-            letter-spacing: -0.5px !important;
+            font-weight: 800 !important;
+            color: #1e293b !important;
+            letter-spacing: -0.025em !important;
+        }
+
+        .card {
+            border-radius: 16px !important;
+            border: 1px solid rgba(0, 0, 0, 0.05) !important;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03) !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02) !important;
+        }
+
+        .box-primary-shadow {
+            box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.3) !important;
+        }
+
+        .box-success-shadow {
+            box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.3) !important;
+        }
+
+        .avatar-status {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid #fff;
         }
 
         .btn {

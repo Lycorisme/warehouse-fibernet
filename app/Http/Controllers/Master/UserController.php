@@ -169,6 +169,15 @@ class UserController extends Controller
             }
         }
 
+        // Update session if it's the current user
+        if (Session::get('user')->user_id == $user->user_id) {
+            $updatedUser = UserModel::leftJoin('tbl_role', 'tbl_role.role_id', '=', 'tbl_user.role_id')
+                ->select('tbl_user.*', 'tbl_role.role_title')
+                ->where('tbl_user.user_id', $user->user_id)
+                ->first();
+            Session::put('user', $updatedUser);
+        }
+
         $data['title'] = "User";
         Session::flash('status', 'success');
         Session::flash('msg', 'Berhasil diubah!');
@@ -186,6 +195,12 @@ class UserController extends Controller
             ]);
             Session::flash('status', 'success');
             Session::flash('msg', 'Password berhasil di ubah!');
+            
+            // Update session
+            $updatedUser = UserModel::leftJoin('tbl_role', 'tbl_role.role_id', '=', 'tbl_user.role_id')
+                ->where('tbl_user.user_id', $user->user_id)
+                ->first();
+            Session::put('user', $updatedUser);
         } else {
             Session::flash('status', 'error');
             Session::flash('msg', 'Password saat ini tidak sama dengan password lama!');
@@ -231,6 +246,13 @@ class UserController extends Controller
         $data['title'] = "Profile";
         Session::flash('status', 'success');
         Session::flash('msg', 'Profile Berhasil diubah!');
+
+        // Update session
+        $updatedUser = UserModel::leftJoin('tbl_role', 'tbl_role.role_id', '=', 'tbl_user.role_id')
+            ->select('tbl_user.*', 'tbl_role.role_title')
+            ->where('tbl_user.user_id', $user->user_id)
+            ->first();
+        Session::put('user', $updatedUser);
 
         //redirect to index
         return redirect(url('admin/profile/' . $user->user_id))->with($data);
