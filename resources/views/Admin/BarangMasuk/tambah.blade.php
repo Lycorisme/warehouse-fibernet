@@ -22,10 +22,10 @@
                                 placeholder="Pilih Tanggal">
                         </div>
                         <div class="form-group">
-                            <label for="customer" class="form-label">Pilih Customer <span
+                            <label for="customer" class="form-label">Pilih Supplier <span
                                     class="text-danger">*</span></label>
                             <select name="customer" id="customer" class="form-control">
-                                <option value="">-- Pilih Customer --</option>
+                                <option value="">-- Pilih Supplier --</option>
                                 @foreach ($customer as $c)
                                     <option value="{{ $c->customer_id }}">{{ $c->customer_nama }}</option>
                                 @endforeach
@@ -210,7 +210,7 @@
                 setLoading(false);
                 return false;
             } else if (customer == "") {
-                validasi('Customer wajib di pilih!', 'warning');
+                validasi('Supplier wajib di pilih!', 'warning');
                 $("select[name='customer']").addClass('is-invalid');
                 setLoading(false);
                 return false;

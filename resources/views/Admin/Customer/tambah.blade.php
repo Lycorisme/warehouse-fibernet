@@ -43,7 +43,7 @@
             resetValid();
 
             if (customer == "") {
-                validasi('Nama Customer wajib di isi!', 'warning');
+                validasi('Nama Supplier wajib di isi!', 'warning');
                 $("input[name='customer']").addClass('is-invalid');
                 setLoading(false);
                 return false;

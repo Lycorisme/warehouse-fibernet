@@ -64,7 +64,7 @@
 
         function hapus(data) {
             $("input[name='idcustomer']").val(data.customer_id);
-            $("#vcustomer").html("customer " + "<b>" + data.customer_nama.replace(/_/g, ' ') + "</b>");
+            $("#vcustomer").html("Supplier " + "<b>" + data.customer_nama.replace(/_/g, ' ') + "</b>");
         }
 
         function validasi(judul, status) {

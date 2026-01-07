@@ -62,7 +62,7 @@
                  @if($m->menu_type == 1)
                  @if($getMenu > 0)
                  <li class="slide">
-                     <a class="side-menu__item {{$title == $m->menu_judul ? 'active' : ''}}" data-bs-toggle="slide" href="{{url('/admin').$m->menu_redirect}}"><i class="side-menu__icon fe fe-{{$m->menu_icon}}"></i><span class="side-menu__label">{{$m->menu_judul}}</span></a>
+                     <a class="side-menu__item {{$title == $m->menu_judul ? 'active' : ''}}" href="{{url('/admin').$m->menu_redirect}}"><i class="side-menu__icon fe fe-{{$m->menu_icon}}"></i><span class="side-menu__label">{{$m->menu_judul}}</span></a>
                  </li>
                  @endif
                  @elseif($m->menu_type == 2)

@@ -82,7 +82,7 @@ use Carbon\Carbon;
                 <th>KODE BRG MASUK</th>
                 <th>KODE BARANG</th>
                 <th>CODE SN</th>
-                <th>CUSTOMER</th>
+                <th>SUPPLIER</th>
                 <th>BARANG</th>
                 <th>JML MASUK</th>
             </tr>

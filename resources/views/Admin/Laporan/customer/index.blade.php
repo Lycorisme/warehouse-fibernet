@@ -38,7 +38,7 @@
                             class="table table-bordered text-nowrap border-bottom dataTable no-footer dtr-inline collapsed">
                             <thead>
                                 <th class="border-bottom-0" width="1%">No</th>
-                                <th class="border-bottom-0">Customer</th>
+                                <th class="border-bottom-0">Supplier</th>
                                 <th class="border-bottom-0">No Telp</th>
                                 <th class="border-bottom-0">Alamat</th>
                                 <th class="border-bottom-0" width="1%">Action</th>
