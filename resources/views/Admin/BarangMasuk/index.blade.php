@@ -15,33 +15,36 @@
 
 
     <!-- ROW -->
-    <div class="row row-sm">
+    <div class="row mt-4">
         <div class="col-lg-12">
-            <div class="card">
-                <div class="card-header justify-content-between">
-                    <h3 class="card-title">Data</h3>
+            <div class="card border-0 shadow-sm">
+                <div class="card-header border-bottom-0 pb-0 d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center">
+                    <div>
+                        <h3 class="card-title fw-bold fs-18">Daftar Barang Masuk</h3>
+                        <p class="text-muted fs-12 mb-0">Monitor dan kelola setiap transaksi barang yang masuk ke gudang.</p>
+                    </div>
                     @if ($hakTambah > 0)
-                        <div>
-                            <a class="modal-effect btn btn-primary-light" onclick="generateID()"
-                                data-bs-effect="effect-super-scaled" data-bs-toggle="modal" href="#modaldemo8">Tambah Data
-                                <i class="fe fe-plus"></i></a>
+                        <div class="mt-3 mt-sm-0">
+                            <a class="modal-effect btn btn-primary box-primary-shadow px-4 py-2" onclick="generateID()"
+                                data-bs-effect="effect-super-scaled" data-bs-toggle="modal" href="#modaldemo8">
+                                <i class="fe fe-plus-circle me-2"></i>Tambah Transaksi</a>
                         </div>
                     @endif
                 </div>
-                <div class="card-body">
+                <div class="card-body pt-4">
                     <div class="table-responsive">
-                        <table id="table-1"
-                            class="table table-bordered text-nowrap border-bottom dataTable no-footer dtr-inline collapsed">
-                            <thead>
-                                <th class="border-bottom-0" width="1%">No</th>
-                                <th class="border-bottom-0">Tanggal Masuk</th>
-                                <th class="border-bottom-0">Kode Barang Masuk</th>
-                                <th class="border-bottom-0">Kode Barang</th>
-                                <th class="border-bottom-0">Kode SN</th>
-                                <th class="border-bottom-0">Supplier</th>
-                                <th class="border-bottom-0">Barang</th>
-                                <th class="border-bottom-0">Jumlah Masuk</th>
-                                <th class="border-bottom-0" width="1%">Action</th>
+                        <table id="table-1" width="100%"
+                            class="table table-hover border-bottom dataTable no-footer">
+                            <thead class="bg-light-50">
+                                <th class="border-bottom-0 text-muted fw-bold" width="1%">NO</th>
+                                <th class="border-bottom-0 text-muted fw-bold">TANGGAL MASUK</th>
+                                <th class="border-bottom-0 text-muted fw-bold">KODE TRANSAKSI</th>
+                                <th class="border-bottom-0 text-muted fw-bold">KODE BARANG</th>
+                                <th class="border-bottom-0 text-muted fw-bold">KODE SN</th>
+                                <th class="border-bottom-0 text-muted fw-bold">SUPPLIER</th>
+                                <th class="border-bottom-0 text-muted fw-bold">BARANG</th>
+                                <th class="border-bottom-0 text-muted fw-bold">JUMLAH</th>
+                                <th class="border-bottom-0 text-muted fw-bold text-end" width="1%">ACTION</th>
                             </thead>
                             <tbody></tbody>
                         </table>

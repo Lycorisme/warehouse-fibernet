@@ -10,66 +10,82 @@
             </ol>
         </div>
     </div>
-    <div class="row row-sm">
+    <div class="row mt-4">
         <div class="col-lg-12">
-            <div class="card">
-                <div class="card-header justify-content-between">
-                    <h3 class="card-title">Data</h3>
+            <div class="card border-0 shadow-sm">
+                <div class="card-header border-bottom-0 pb-0 d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center">
+                    <div>
+                        <h3 class="card-title fw-bold fs-18">Laporan Mutasi & Stok Barang</h3>
+                        <p class="text-muted fs-12 mb-0">Lihat ringkasan stok awal, mutasi barang (masuk/keluar), dan total stok akhir secara real-time.</p>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <div class="row mb-4">
-                        <div class="col-12">
-                            <label for="" class="fw-bold">Filter Laporan</label>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <input type="text" name="tglawal" class="form-control datepicker-date"
-                                    placeholder="Tanggal Awal">
+                <div class="card-body pt-4">
+                    <div class="bg-light p-4 rounded-3 mb-4 section-filter">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <h6 class="fw-bold text-dark mb-0"><i class="fe fe-filter me-2 text-primary"></i>Filter Laporan</h6>
                             </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <input type="text" name="tglakhir" class="form-control datepicker-date"
-                                    placeholder="Tanggal Akhir">
+                            <div class="col-md-3">
+                                <div class="form-group mb-0">
+                                    <label class="fs-12 fw-bold text-muted mb-1">Tanggal Awal</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-white border-end-0"><i class="fe fe-calendar text-muted"></i></span>
+                                        <input type="text" name="tglawal" class="form-control datepicker-date border-start-0"
+                                            placeholder="Pilih Tanggal" autocomplete="off">
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <select name="filter_jenis" class="form-control">
-                                    <option value="">-- Semua Jenis --</option>
-                                    @foreach ($jenis as $j)
-                                        <option value="{{ $j->jenisbarang_nama }}">{{ $j->jenisbarang_nama }}</option>
-                                    @endforeach
-                                </select>
+                            <div class="col-md-3">
+                                <div class="form-group mb-0">
+                                    <label class="fs-12 fw-bold text-muted mb-1">Tanggal Akhir</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-white border-end-0"><i class="fe fe-calendar text-muted"></i></span>
+                                        <input type="text" name="tglakhir" class="form-control datepicker-date border-start-0"
+                                            placeholder="Pilih Tanggal" autocomplete="off">
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <input type="text" name="search_nama" class="form-control"
-                                    placeholder="Cari Nama Barang..." autocomplete="off">
+                            <div class="col-md-3">
+                                <div class="form-group mb-0">
+                                    <label class="fs-12 fw-bold text-muted mb-1">Kategori Barang</label>
+                                    <select name="filter_jenis" class="form-control select2">
+                                        <option value="">Semua Kategori</option>
+                                        @foreach ($jenis as $j)
+                                            <option value="{{ $j->jenisbarang_nama }}">{{ $j->jenisbarang_nama }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-12 mt-2">
-                            <button class="btn btn-success-light" onclick="filter()"><i class="fe fe-filter"></i>
-                                Filter</button>
-                            <button class="btn btn-secondary-light" onclick="reset()"><i class="fe fe-refresh-ccw"></i>
-                                Reset</button>
-                            <button class="btn btn-primary-light" onclick="print()"><i class="fe fe-printer"></i>
-                                Print</button>
+                            <div class="col-md-3">
+                                <div class="form-group mb-0">
+                                    <label class="fs-12 fw-bold text-muted mb-1">Cari Barang</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-white border-end-0"><i class="fe fe-search text-muted"></i></span>
+                                        <input type="text" name="search_nama" class="form-control border-start-0" 
+                                            placeholder="Nama barang..." autocomplete="off">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-3 d-flex gap-2">
+                                <button class="btn btn-primary px-4" onclick="filter()"><i class="fe fe-check-circle me-2"></i>Terapkan Filter</button>
+                                <button class="btn btn-outline-secondary px-4" onclick="reset()"><i class="fe fe-refresh-cw me-2"></i>Reset</button>
+                                <button class="btn btn-outline-danger px-4" onclick="print()"><i class="fe fe-printer me-2"></i>Print Mutasi</button>
+                            </div>
                         </div>
                     </div>
+
                     <div class="table-responsive">
-                        <table id="table-1"
-                            class="table table-bordered text-nowrap border-bottom dataTable no-footer dtr-inline collapsed">
-                            <thead>
-                                <th class="border-bottom-0" width="1%">No</th>
-                                <th class="border-bottom-0">Kode Barang</th>
-                                <th class="border-bottom-0">Barang</th>
-                                <th class="border-bottom-0">Jenis</th>
-                                <th class="border-bottom-0">Stok Awal</th>
-                                <th class="border-bottom-0">Jumlah Masuk</th>
-                                <th class="border-bottom-0">Jumlah Keluar</th>
-                                <th class="border-bottom-0">Total Stok</th>
+                        <table id="table-1" width="100%"
+                            class="table table-hover border-bottom dataTable no-footer">
+                            <thead class="bg-light-50">
+                                <th class="border-bottom-0 text-muted fw-bold" width="1%">NO</th>
+                                <th class="border-bottom-0 text-muted fw-bold">KODE BARANG</th>
+                                <th class="border-bottom-0 text-muted fw-bold">NAMA BARANG</th>
+                                <th class="border-bottom-0 text-muted fw-bold">JENIS</th>
+                                <th class="border-bottom-0 text-muted fw-bold text-center">STOK AWAL</th>
+                                <th class="border-bottom-0 text-muted fw-bold text-center text-success">MASUK</th>
+                                <th class="border-bottom-0 text-muted fw-bold text-center text-danger">KELUAR</th>
+                                <th class="border-bottom-0 text-muted fw-bold text-center">STOK AKHIR</th>
                             </thead>
                             <tbody></tbody>
                         </table>
